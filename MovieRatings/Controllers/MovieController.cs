@@ -39,5 +39,20 @@ namespace MovieRatings.Controllers
                 return BadRequest("Failed to add movie");
             }
         }
+
+
+        [HttpGet(nameof(GetMovies))]
+        public async Task<IActionResult> GetMovies()
+        {
+            var movies = _context.Movies.ToList();
+            return Ok(movies);
+        }
+        
+        [HttpGet(nameof(GetMovieById))]
+        public async Task<IActionResult> GetMovieById(int id)
+        {
+            var movies = _context.Movies.FindAsync(id);
+            return Ok(movies.Result);
+        }
     }
 }
